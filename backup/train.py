@@ -9,8 +9,8 @@ from torch.nn.utils.rnn import pack_padded_sequence
 from models import *
 from datasets import *
 from utils import *
-#from params import *
-from params_class import *
+from params import *
+# from params_class import *
 from nltk.translate.bleu_score import corpus_bleu
 
 # Cuda
@@ -317,7 +317,7 @@ def validate(val_loader, encoder, decoder, criterion):
     # solves the issue #57
     with torch.no_grad():
         # Batches
-        for i, (imgs, image_sizes, caps, caplens, allcaps) in enumerate(val_loader):
+        for i, (imgs, ori_images, image_sizes, filenames, caps, caplens, allcaps) in enumerate(val_loader):
 
             # Move to device, if available
             imgs = imgs.to(device)

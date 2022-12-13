@@ -1,31 +1,52 @@
+import argparse
+import time
 import torch.backends.cudnn as cudnn
 import torch.optim
 import torch.utils.data
 import torchvision.transforms as transforms
-from models import *
+from torch import nn
+from torch.nn.utils.rnn import pack_padded_sequence
+from models_extended import *
 from datasets import *
 from utils import *
-from params import *
-from nltk.translate.bleu_score import corpus_bleu
+from params_class import *
 import torch.nn.functional as F
-from tqdm import tqdm
-
-# Set your beam size here
-beam_size = 3
+from nltk.translate.bleu_score import corpus_bleu
 
 # Cuda
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  # sets device for model and PyTorch tensors
 print(f"Device: {device}")
 cudnn.benchmark = True  # set to true only if inputs to model are fixed size; otherwise lot of computational overhead
 
-
 def evaluate(beam_size):
+
     """
     Evaluation
 
     :param beam_size: beam size at which to generate captions for evaluation
     :return: BLEU-4 score
     """
+    args = _parse_arguments()
+    (data_path,
+    data_folder, 
+    data_name, 
+    data_checkpoint, 
+    data_best_checkpoint, 
+    data_target_best_checkpoint,
+    data_word_map_file, 
+    data_train_log, 
+    data_val_log, 
+    data_train_mean,  
+    data_train_std, 
+    data_val_mean, 
+    data_val_std, 
+    data_test_mean, 
+    data_test_std,
+    emb_dim,
+    attention_dim,
+    decoder_dim,
+    dropout )= return_params(args.which_data, args.which_model)
+
     # Load word map (word2ix)
     with open(data_word_map_file, 'r') as j:
         word_map = json.load(j)
@@ -39,14 +60,34 @@ def evaluate(beam_size):
                                     vocab_size=vocab_size,
                                     dropout=dropout)
 
-    encoder = ResNet101Encoder()
+    if args.which_model == "resnet101":
+        encoder = ResNet101Encoder()  # I kept it as text right now but you can import model
+        print("ResNet101Encoder")
+    elif args.which_model == "resnet152":
+        encoder = ResNet152Encoder()
+        print("ResNet152Encoder")
+    elif args.which_model == "resnet50":
+        encoder = ResNet50Encoder()
+        print("ResNet50Encoder")
+    # elif args.which_model == "resnet34":
+    #     encoder = ResNet34Encoder()
+    #     print("ResNet34Encoder")
+    # elif args.which_model == "resnet18":
+    #     encoder = ResNet18Encoder()
+    #     print("ResNet18Encoder")
+    else:
+        print(
+            f"User selected {args.which_model} model not found.\r\nPlease select one of the available models ('resnet50', 'resnet101', or 'resnet152') correctly."
+        ) 
+        exit()
 
     # Move to GPU, if available
     decoder = decoder.to(device)
     encoder = encoder.to(device)
 
     # Load model
-    checkpoint = torch.load(data_best_checkpoint)
+    print(f"Checkpoint name: {data_best_checkpoint}")
+    checkpoint = torch.load(data_best_checkpoint, map_location=(str(device)))
     # decoder = checkpoint['decoder']
     decoder.load_state_dict(checkpoint['decoder_state_dict'])
     # decoder = decoder.to(device)
@@ -76,7 +117,7 @@ def evaluate(beam_size):
     hypotheses = list()
 
     # For each image (batch_size of 1)
-    for i, (image, image_size, caps, caplens, allcaps) in enumerate(
+    for i, (image, ori_image, image_size, filename, caps, caplens, allcaps) in enumerate(
             tqdm(loader, desc="EVALUATING AT BEAM SIZE " + str(beam_size))):
 
         k = beam_size
@@ -197,7 +238,16 @@ def evaluate(beam_size):
 
     return bleu4
 
+def _parse_arguments():
+    argparser = argparse.ArgumentParser()
+    argparser.add_argument("-m", "--which_model", default="resnet101", type=str, 
+    help="Which model to use 'resnet50', 'resnet101', or 'resnet152'", choices=["resnet50","resnet101", "resnet152"])
+    argparser.add_argument("-d", "--which_data", default="coco2014", type=str, 
+    help="Which dataset to use 'coco2014', 'flickr8k', 'flickr30k'", choices=["coco2014", "flickr8k", "flickr30k"])
+    argparser.add_argument("-b", "--beam_size", default=3, type=int,
+    help="Beam size at which to generate captions for evaluation", choices=[0, 1, 2, 3, 4, 5, 6, 7, 8])
+    return argparser.parse_args()
 
-if __name__ == '__main__':
-    
-    print("\nBLEU-4 score @ beam size of %d is %.4f." % (beam_size, evaluate(beam_size)))
+if __name__ == "__main__":
+    args = _parse_arguments()
+    print("\nBLEU-4 score @ beam size of %d is %.4f." % (args.beam_size, evaluate(args.beam_size)))

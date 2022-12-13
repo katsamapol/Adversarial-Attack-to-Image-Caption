@@ -102,8 +102,10 @@ def create_input_files(dataset, karpathy_json_path, image_folder, captions_per_i
             enc_captions = []
             caplens = []
             img_ori_sizes = []
-
+            filenames = []
             for i, path in enumerate(tqdm(impaths)):
+                # Prepare filenames
+                filenames.append(os.path.basename(impaths[i]))
 
                 # Sample captions
                 if len(imcaps[i]) < captions_per_image:
@@ -153,6 +155,9 @@ def create_input_files(dataset, karpathy_json_path, image_folder, captions_per_i
 
             with open(os.path.join(output_folder, split + '_IMAGESIZE_' + base_filename + '.json'), 'w') as j:
                 json.dump(img_ori_sizes, j)
+
+            with open(os.path.join(output_folder, split + '_FILENAMES_' + base_filename + '.json'), 'w') as j:
+                json.dump(filenames, j)
 
 def init_embedding(embeddings):
     """

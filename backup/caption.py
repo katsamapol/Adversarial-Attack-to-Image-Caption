@@ -14,7 +14,9 @@ from models import *
 from params import *
 from utils import *
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# Cuda
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  # sets device for model and PyTorch tensors
+print(f"Device: {device}")
 
 def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size):
     """
@@ -199,17 +201,16 @@ def visualize_att(image_path, output_path, seq, alphas, rev_word_map, smooth=Tru
             plt.imshow(alpha, alpha=0.8)
         plt.set_cmap(cm.Greys_r)
         plt.axis('off')
-    plt.show()
 
     # file name without extension
-    plt.savefig(f'{os.path.splitext(output_path)[0]}.png', bbox_inches='tight')
-
+    plt.savefig(f'{os.path.splitext(output_path)[0]}.png', bbox_inches='tight', dpi=300)
+    plt.show()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Show, Attend, and Tell - Tutorial - Generate Caption')
 
-    parser.add_argument('--img', '-i', default="/scratch/ps4534/ml/image-captioning/real_6.png", help='path to image')
-    parser.add_argument('--out', '-o', default="/scratch/ps4534/ml/image-captioning/real_6_caption.png", help='path to output image')
+    parser.add_argument('--img', '-i', default="/scratch/ps4534/ml/image-captioning/S__50880578.jpg", help='path to image')
+    parser.add_argument('--out', '-o', default="/scratch/ps4534/ml/image-captioning/S__50880578_caption.png", help='path to output image')
     parser.add_argument('--model', '-m', default=data_checkpoint, help='path to model')
     parser.add_argument('--word_map', '-wm', default=data_word_map_file, help='path to word map JSON')
     parser.add_argument('--beam_size', '-b', default=3, type=int, help='beam size for beam search')
@@ -249,8 +250,8 @@ if __name__ == '__main__':
 
     # Encode, decode with attention and beam search
     seq, alphas = caption_image_beam_search(encoder, decoder, args.img, word_map, args.beam_size)
-    print(alphas.shape)
+    # print(alphas.shape)
     alphas = torch.FloatTensor(alphas)
-    print(alphas.shape)
+    # print(alphas.shape)
     # Visualize caption and attention of best sequence
     visualize_att(args.img, args.out, seq, alphas, rev_word_map, args.smooth)
