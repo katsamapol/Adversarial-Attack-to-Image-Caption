@@ -2,8 +2,13 @@
 
 ## Requirements
 
-## Training
+## Getting Data
+#TODO
 
+## Data Preprocessing
+#TODO
+
+## Training
 Check training options: 
 ```
 python train_args.py -h
@@ -14,7 +19,7 @@ To begin training, you must specify
 3. begin finetuning from scratch between True and False, select False if you want to continue training from your saved model.
 4. Finetune your model encode between True and False
 ```
-# python train_args.py --which_model="resnet101" --which_data="coco2014" --start_from_scratch="True" --fine_tune_encoder="True"
+python train_args.py --which_model="resnet101" --which_data="coco2014" --start_from_scratch="True" --fine_tune_encoder="True"
 
 ```
 - Implemented Adversarial Attack using ResNet50, ResNet101, ResNet152
