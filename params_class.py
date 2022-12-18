@@ -1,6 +1,6 @@
 # Working path
 global data_path
-data_path = "/data/" #Make sure you add slash(/) at the end.
+data_path = "/scratch/ps4534/ml/image-captioning/data/" #Make sure you add slash(/) at the end.
 
 
 def return_params(which_data, which_model, target_model=""):
@@ -62,7 +62,7 @@ class Params:
 
         #if which_data == "flickr8k" or which_data == "coco2014":
         if which_data == "flickr8k":
-            self.data_folder = f"{self.data_path}processed_HDF5/Flickr8k/"  # folder with data files saved by create_input_files.py
+            self.data_folder = f"{self.data_path}processed_HDF5/flickr8k/"  # folder with data files saved by create_input_files.py
             self.data_train_mean = [0.4580, 0.4464, 0.4032]
             self.data_train_std = [0.2704, 0.2630, 0.2776]
             self.data_val_mean = [0.4573, 0.4448, 0.4060]
@@ -71,7 +71,7 @@ class Params:
             self.data_test_std = [0.2699, 0.2637, 0.2809]
 
         elif which_data == "coco2014":
-            self.data_folder = f"{self.data_path}processed_HDF5/COCO2014/"
+            self.data_folder = f"{self.data_path}processed_HDF5/coco2014/"
             self.data_train_mean = [0.4702, 0.4470, 0.4078]
             self.data_train_std = [0.2701, 0.2655, 0.2809]
             self.data_val_mean = [0.4688, 0.4453, 0.4054]
