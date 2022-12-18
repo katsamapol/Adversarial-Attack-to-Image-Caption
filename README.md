@@ -8,14 +8,7 @@
 - We thank rmokady's repository [CLIP Prefix Captioning](https://github.com/rmokady/CLIP_prefix_caption) for creating image-captioning model from CLIP.
 Both incredibly inspired us to work on this topic.
 
-
-## SCRATCH PAPER AREA, will be removed later
-- Implemented Adversarial Attack using ResNet50, ResNet101, ResNet152
-- We followed sgrvinod instruction on how to do image captioning
-- Tested White-Box attack on each of the Models
-
 ## Installing Prerequisites
-#TODO explaning how to install our requirements.txt using conda environment.
 Make sure you have conda installed.
 - [Windows](https://conda.io/projects/conda/en/latest/user-guide/install/windows.html)
 - [macOS](https://conda.io/projects/conda/en/latest/user-guide/install/macos.html)
@@ -33,12 +26,22 @@ conda install --file requirements.txt
 ```
 
 ## Getting Data
-#TODO explaning where to download COCO2014 and Flickr8K dataset 
-Download MSCOCO2014 [training](http://images.cocodataset.org/zips/train2014.zip) and [validation](http://images.cocodataset.org/zips/val2014.zip) images.
-Download captions of the images created by Andrej Karpathy and Li Fei-Fei in JSON blobs format [here](https://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip).
+- Download MSCOCO2014 [training](http://images.cocodataset.org/zips/train2014.zip) and [validation](http://images.cocodataset.org/zips/val2014.zip) images.
+- Download captions of the images created by Andrej Karpathy and Li Fei-Fei in JSON blobs format [here](https://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip).
 
 ## Data Preprocessing
-#TODO explaning how to use create_input_files.py to preprocess datasets
+In `create_input_files.py`
+- Specify path to Karpathy's JSON files
+- Specify path to MSCOCO2014 image folder
+- Specify output path
+
+Then run*
+```
+python create_input_files.py
+```
+
+*Don't forget to run every command inside your conda with python3.6 installed
+
 
 ## Training
 #TODO explaning how to use train_args.py to train resnet50, resnet101, and resnet152 models
