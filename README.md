@@ -15,22 +15,27 @@ Make sure you have conda installed.
 - [Linux](https://conda.io/projects/conda/en/latest/user-guide/install/linux.html)
 
 
-Create new conda environment with a specified python3.6 version.
+Create new conda environment using provided [environment.yml](https://github.com/katsamapol/Adversarial-Attack-to-Image-Caption/blob/main/environment.yml)*
+*(optional) You can change environment name by editing the first line from `adv_caption` to your preference name.
 ```
+conda env create -f /path_to_your_file/environment.yml
+```
+
+<!-- ```
 conda create -n "[your_environment_name]" python=3.6 
-```
+``` -->
 
 Then run:
 ```
-conda activate [your_environment_name]
+conda activate adv_caption
 ```
 
-To activate your conda environment you have just created.
+To activate the conda environment you have just created.
 
-After that, install [requirement.txt](https://github.com/katsamapol/Adversarial-Attack-to-Image-Caption/blob/main/requirements.txt) with conda install command.
+<!-- After that, install [requirement.txt](https://github.com/katsamapol/Adversarial-Attack-to-Image-Caption/blob/main/requirements.txt) with conda install command.
 ```
-conda install --file requirements.txt
-```
+conda install --file /path_to_your_file/requirements.txt
+``` -->
 
 ## Getting Data
 This repository supports working with MSCOCO2014 dataset and Flickr8K dataset.
