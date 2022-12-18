@@ -1,7 +1,7 @@
 # Adversarial-Attack-to-Image-Caption
 - This project focused on creating adversarial samples to attack unknowned image-captioning models and test theirs robustness.
 - Our code built on python 3.6 and PyTorch 1.10. One can check the dependencies in [requirement.txt](https://github.com/katsamapol/Adversarial-Attack-to-Image-Caption/blob/main/requirements.txt)
-- The code is not working with python 3.7 and above, however, one can migrate it to python 3.7+ by changing images manipulation from [scipy.misc.imread](https://docs.scipy.org/doc/scipy-1.1.0/reference/generated/scipy.misc.imread.html) library to other newer libraries such as [imageio](https://imageio.readthedocs.io/en/v2.8.0/userapi.html). 
+- The code is not working with python 3.7 and above, however, one can migrate it to python 3.7+ by changing images manipulation library from [scipy.misc.imread](https://docs.scipy.org/doc/scipy-1.1.0/reference/generated/scipy.misc.imread.html) to other newer libraries such as [imageio](https://imageio.readthedocs.io/en/v2.8.0/userapi.html). 
 
 ## Disclaimer
 - We thank sgrvinod's repository [A PyTorch Totorial to Image Captioning](https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning) for his comprehensive image-captioning tutorial.
@@ -16,10 +16,26 @@ Both incredibly inspired us to work on this topic.
 
 ## Installing Prerequisites
 #TODO explaning how to install our requirements.txt using conda environment.
-We use sgrvinod: a PyTorch Tutorial to Image Captioning's repository 
+Make sure you have conda installed.
+- [Windows](https://conda.io/projects/conda/en/latest/user-guide/install/windows.html)
+- [macOS](https://conda.io/projects/conda/en/latest/user-guide/install/macos.html)
+- [Linux](https://conda.io/projects/conda/en/latest/user-guide/install/linux.html)
+
+
+Create new conda environment with a specified python3.6 version
+```
+conda create -n python=3.6 [your_environment_name]
+```
+
+Install [requirement.txt](https://github.com/katsamapol/Adversarial-Attack-to-Image-Caption/blob/main/requirements.txt) with conda install command
+```
+conda install --file requirements.txt
+```
 
 ## Getting Data
 #TODO explaning where to download COCO2014 and Flickr8K dataset 
+Download MSCOCO2014 [training](http://images.cocodataset.org/zips/train2014.zip) and [validation](http://images.cocodataset.org/zips/val2014.zip) images.
+Download captions of the images created by Andrej Karpathy and Li Fei-Fei in JSON blobs format [here](https://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip).
 
 ## Data Preprocessing
 #TODO explaning how to use create_input_files.py to preprocess datasets
