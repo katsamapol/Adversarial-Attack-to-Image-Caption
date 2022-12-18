@@ -2,22 +2,14 @@ import argparse
 import time
 import torch as nn
 import torch.nn.functional as F
-import numpy as np
 import json
 import torchvision.transforms as transforms
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm
-import skimage.transform
 from torch.nn.utils.rnn import pack_padded_sequence
 import os
-from scipy.misc import imread, imresize
-from PIL import Image
 from models_extended import *
 from datasets import *
 from params_class import *
 from utils import *
-from torchsummary import summary
-import matplotlib.pyplot as plt
 
 # Cuda
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  # sets device for model and PyTorch tensors
@@ -180,29 +172,25 @@ def main():
     print(f"epsilon: {epsilon}")
     
     if(args.export_original_image == "True"):
-        original_output_folder = os.path.join(args.export_image_path, "original_"+args.which_model+"_"+str(args.epsilon).replace(".","_"))
-        try:
+        temp_ori_output_folder = os.path.join(data_path, "adversarial_samples")
+        original_output_folder = os.path.join(temp_ori_output_folder, "original_"+args.which_data)
+        if(not os.path.exists(original_output_folder)):
             os.makedirs(original_output_folder, exist_ok = True)
             print("Directory '%s' created successfully" % original_output_folder)
-        except OSError as error:
-            print("Directory '%s' can not be created" % original_output_folder)
 
     if(args.export_perturbed_image == "True"):
-        perturbed_output_folder = os.path.join(args.export_image_path, "perturbed_"+args.which_model+"_"+str(args.epsilon).replace(".","_"))
-        try:
+        temp_ori_output_folder = os.path.join(data_path, "adversarial_samples")
+        perturbed_output_folder = os.path.join(temp_ori_output_folder, "perturbed_"+args.which_model+"_"+args.which_data+"_"+str(args.epsilon).replace(".","_"))
+        if(not os.path.exists(perturbed_output_folder)):
             os.makedirs(perturbed_output_folder, exist_ok = True)
             print("Directory '%s' created successfully" % perturbed_output_folder)
-        except OSError as error:
-            print("Directory '%s' can not be created" % perturbed_output_folder)
 
     if(args.export_caption == "True"):
-        caption_output_folder = args.export_caption_path
-        caption_filename = os.path.join(caption_output_folder, f"{args.which_model}.json")
-        try:
+        caption_output_folder = os.path.join(data_path, "adversarial_samples/caption")
+        caption_filename = os.path.join(caption_output_folder, f"{args.which_model}_{args.which_data}.json")
+        if(not os.path.exists(caption_output_folder)):
             os.makedirs(caption_output_folder, exist_ok = True)
             print("Directory '%s' created successfully" % caption_output_folder)
-        except OSError as error:
-            print("Directory '%s' can not be created" % caption_output_folder)
 
     # For each image (batch_size of 32)
     captions = []
@@ -531,21 +519,21 @@ def _parse_arguments():
     argparser.add_argument("-t", "--target_model", default="resnet101", type=str, 
     help="Targeting model to be attacked by which_model", choices=["resnet50", "resnet101", "resnet152"])
     argparser.add_argument("-d", "--which_data", default="coco2014", type=str, 
-    help="Which dataset to use 'coco2014', 'flickr8k', 'flickr30k'", choices=["coco2014", "flickr8k", "flickr30k"])
+    help="Which dataset to use 'coco2014', or 'flickr8k'", choices=["coco2014", "flickr8k"])
     argparser.add_argument("-b", "--beam_size", default=3, type=int,
-    help="Beam size at which to generate captions for evaluation", choices=[0, 1, 2, 3, 4, 5])
+    help="Beam size at which to generate captions for evaluation", choices=[1, 2, 3, 4, 5, 6, 7, 8])
     argparser.add_argument("-e", "--epsilon", default=0.004, type=float,
-    help="Epsilon at which to create perturbation images", choices=[0.004, 0.02, 0.04, 0.1, 0.2, 0.4])
+    help="Epsilon at which to create perturbation images", choices=[0.004, 0.02, 0.04, 0.1, 0.2, 0.3, 0.4])
     argparser.add_argument('-o', '--export_original_image', type=str, default="False",
     help='Export compressed original image flag, set to True if you want to export compressed original images.', choices=['True', 'False'])
     argparser.add_argument('-p', '--export_perturbed_image', type=str, default="False",
     help='Export compressed perturbed image flag, set to True if you want to export compressed perturbed images.', choices=['True', 'False'])
     argparser.add_argument('-c', '--export_caption', type=str, default="False",
     help='Export caption flag, set to True if you want to export caption.', choices=['True', 'False'])
-    argparser.add_argument('-cp', '--export_caption_path', type=str, default="/scratch/ps4534/ml/adversarial-attack-to-caption/data/captions/",
-    help='Path to export captions')
-    argparser.add_argument('-ip', '--export_image_path', type=str, default="/scratch/ps4534/ml/adversarial-attack-to-caption/data/images/",
-    help='Path to export images')
+    # argparser.add_argument('-cp', '--export_caption_path', type=str, default="/scratch/ps4534/ml/adversarial-attack-to-caption/data/captions/",
+    # help='Path to export captions')
+    # argparser.add_argument('-ip', '--export_image_path', type=str, default="/scratch/ps4534/ml/adversarial-attack-to-caption/data/images/",
+    # help='Path to export images')
     return argparser.parse_args()
 
 if __name__ == "__main__":
