@@ -28,12 +28,15 @@ conda install --file requirements.txt
 ## Getting Data
 - Download MSCOCO2014 [training](http://images.cocodataset.org/zips/train2014.zip) and [validation](http://images.cocodataset.org/zips/val2014.zip) images.
 - Download captions of the images created by Andrej Karpathy and Li Fei-Fei in JSON blobs format [here](https://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip).
+- This repository supports Flickr8k dataset too. 
 
 ## Data Preprocessing
-In `params_class.py`
-- Specify data path to your working directory e.g., `data_path = "/data/"`
-- Extract Karpathy's JSON files to your working directory under caption_datasets folder i.e., `/data/caption_datasets/`
-- Extract MSCOCO2014 images to your working directory under images folder i.e., `/data/images/`
+- In the third line of `params_class.py`, specify data path to your working directory e.g., `data_path = "/[dir_name]/data/"`
+- Your Karpathy's JSON files should be extracted to the same directory i.e., `/[dir_name]/data/caption_datasets/`
+If you choose to work with MSCOCO2014 dataset
+- Your images folder should look like `/data/images/coco2014/train2014/` for train2014.zip, `/data/images/coco2014/val2014/` for val2014.zip, and `/data/images/coco2014/test2014/` for test2014.zip
+If you choose to work with Flickr8K dataset
+- Your images folder should look like `/data/images/flickr8k/`
 
 Then run
 ```
