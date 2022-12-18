@@ -1,14 +1,19 @@
 # Adversarial-Attack-to-Image-Caption
 
+## Disclaimer
+- We thank sgrvinod's repository [A PyTorch Totorial to Image Captioning](https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning) for his comprehensive image-captioning tutorial.
+- We thank rmokady's repository [CLIP Prefix Captioning](https://github.com/rmokady/CLIP_prefix_caption) for creating image-captioning model from CLIP.
+Both incredibly inspired us to work on this topic.
+
+
 ## SCRATCH PAPER AREA, will be removed later
 - Implemented Adversarial Attack using ResNet50, ResNet101, ResNet152
 - We followed sgrvinod instruction on how to do image captioning
-- A complete tutorial by sgrvinod can be found at https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning
 - Tested White-Box attack on each of the Models
-- Tested Black-Box attack on CLIP prefix captioning model by rmokady, can be found at https://github.com/rmokady/CLIP_prefix_caption
 
 ## Installing Prerequisites
 #TODO explaning how to install our requirements.txt using conda environment.
+We use sgrvinod: a PyTorch Tutorial to Image Captioning's repository 
 
 ## Getting Data
 #TODO explaning where to download COCO2014 and Flickr8K dataset 
