@@ -64,6 +64,7 @@ python create_input_files.py --which_data="flickr8k"
 
 ## Training
 #TODO explaning how to use train_args.py to train resnet50, resnet101, and resnet152 models
+
 #And carify that even select "start_from_scratch" the model will still be train using pre-trained model trained on ImageNet dataset.
 
 Check training options: 
@@ -81,6 +82,11 @@ python train_args.py --which_model="resnet101" --which_data="coco2014" --start_f
 ```
 ## Evaluating
 #TODO Explaning how to use eval_args.py to evaluate models.
+Once you have completed training for at least one epoch, a model checkpoint will be saved at `/[dir_name]/data/checkpoints/`.
+To evaluate your model, run:
+```python
+
+```
 
 ## Captioning
 #TODO Explaning how to use caption_args.py to create caption from an image.
