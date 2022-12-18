@@ -17,7 +17,7 @@ Make sure you have conda installed.
 
 Create new conda environment using provided [environment.yml](https://github.com/katsamapol/Adversarial-Attack-to-Image-Caption/blob/main/environment.yml)*
 
-*(optional) You can change environment name by editing the first line from `adv_caption` to your preference name.
+*(optional) You can change environment name by editing the first line in environment.yml from `adv_caption` to your preference name.
 ```
 conda env create -f /path_to_your_file/environment.yml
 ```
