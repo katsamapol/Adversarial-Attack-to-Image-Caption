@@ -45,10 +45,10 @@ This repository supports working with MSCOCO2014 dataset and Flickr8K dataset.
 - Download captions of the images created by Andrej Karpathy and Li Fei-Fei in JSON blobs format [here](https://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip).
 
 ## Data Preprocessing
-- In the third line of `params_class.py`, specify data path to your working directory e.g., `data_path = "/[dir_name]/data/"`
+- In the fifth line of `params_class.py`, specify data path to your working directory e.g., `data_path = "/[dir_name]/data/"`
 - Your Karpathy's JSON files should be extracted to the same directory i.e., `/[dir_name]/data/caption_datasets/`
-- If you choose to work with MSCOCO2014, your images folder should look like `/data/images/coco2014/train2014/` for train2014.zip, `/data/images/coco2014/val2014/` for val2014.zip, and `/data/images/coco2014/test2014/` for test2014.zip
-- If you choose to work with Flickr8K, your images folder should look like `/data/images/flickr8k/`
+- If you choose to work with MSCOCO2014, your images folder should look like `/[dir_name]/data/images/coco2014/train2014/` for train2014.zip, `/[dir_name]/data/images/coco2014/val2014/` for val2014.zip, and `/[dir_name]/data/images/coco2014/test2014/` for test2014.zip
+- If you choose to work with Flickr8K, your images folder should look like `/[dir_name]/data/images/flickr8k/`
 
 From now on, don't forget to run every command inside your conda environment with python3.6 installed.
 For MSCOCO2014 dataset, run:
@@ -87,7 +87,7 @@ Once you have completed training for at least one epoch, a model checkpoint will
 
 To evaluate your model, run:
 ```python
-
+python eval_args.py --which_model="resnet101" --which_data="coco2014"
 ```
 
 ## Captioning
@@ -95,15 +95,16 @@ To evaluate your model, run:
 
 To generate caption of an image, run:
 ```python
-
+python caption_args.py --which_model="resnet101" --which_data="coco2014" --img="[path_to_the_image]"
 ```
+You will see the path to output image after the image has been successfully captioned.
 
 ## Generating adversarial samples
 #TODO 
 
 To generate adversarial samples from images in test set, run:
 ```python
-
+python /scratch/ps4534/ml/image-captioning/attack_args.py --which_model="resnet50" --target_model="resnet50" --which_data="flickr8k" --beam_size=3 --epsilon=0.004 --export_caption="True" --export_original_image="True" --export_perturbed_image="True"
 ```
 
 ## Attacking CLIP cap with the adversarial samples
