@@ -466,11 +466,11 @@ def _parse_arguments():
     argparser.add_argument("-m", "--which_model", default="resnet101", type=str, 
     help="Which model to use 'resnet50', 'resnet101', or 'resnet152'", choices=["resnet50", "resnet101", "resnet152"])
     argparser.add_argument("-d", "--which_data", default="coco2014", type=str, 
-    help="Which dataset to use 'coco2014', 'flickr8k', 'flickr30k'", choices=["coco2014", "flickr8k", "flickr30k"])
+    help="Which dataset to use 'coco2014', or 'flickr8k'", choices=["coco2014", "flickr8k"])
     argparser.add_argument("-s", "--start_from_scratch", type=str, required=True,
     help="Start from scratch? -> assign `True` only if you want to begin training from scratch", choices=["True", "False"])
     argparser.add_argument("-f", "--fine_tune_encoder", type=str, required=True,
-    help="Fine-tune encoder? -> assign `True` if you are training a different dataset", choices=["True", "False"])
+    help="Fine-tune encoder? -> assign `True`", choices=["True", "False"])
 
     return argparser.parse_args()
 
