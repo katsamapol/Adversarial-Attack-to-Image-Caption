@@ -32,19 +32,14 @@ conda install --file requirements.txt
 ## Data Preprocessing
 In `params_class.py`
 - Specify data path to your working directory e.g., `data_path = "/data/"`
-Extract Karpathy's JSON files to your working directory under caption_datasets folder i.e., `/data/caption_datasets/`
-Extract MSCOCO2014 images to your working directory under images folder i.e., `/data/images/`
+- Extract Karpathy's JSON files to your working directory under caption_datasets folder i.e., `/data/caption_datasets/`
+- Extract MSCOCO2014 images to your working directory under images folder i.e., `/data/images/`
 
-In `create_input_files.py`
-- Specify path to Karpathy's JSON files
-- Specify path to MSCOCO2014 image folder
-- Specify output path
-
-Then run*
+Then run
 ```
+conda activate [your_environment_name]
 python create_input_files.py
 ```
-
 *Don't forget to run every command inside your conda with python3.6 installed
 
 
