@@ -80,6 +80,11 @@ def create_input_files(dataset, karpathy_json_path, image_folder, captions_per_i
     # Create a base/root name for all output files
     base_filename = dataset + '_' + str(captions_per_image) + '_cap_per_img_' + str(min_word_freq) + '_min_word_freq'
 
+    # Check if folder existed
+    if(not os.path.exists(output_folder)):
+        os.makedirs(output_folder)
+        print(f"Folder {output_folder} has been created.")
+        
     # Save word map to a JSON
     with open(os.path.join(output_folder, 'WORDMAP_' + base_filename + '.json'), 'w') as j:
         json.dump(word_map, j)
