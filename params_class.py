@@ -1,3 +1,5 @@
+import os
+
 # Working path
 global data_path
 data_path = "/scratch/ps4534/ml/image-captioning/data/" #Make sure you add slash(/) at the end.
@@ -54,15 +56,27 @@ class Params:
             self.target_model = which_model
         self.data_name = f"{which_data}_5_cap_per_img_5_min_word_freq"
 
-        self.data_best_checkpoint = f"{self.data_path}checkpoints/BEST_checkpoint_{self.which_model}_{self.data_name}.pth.tar"
-        self.data_checkpoint = f"{self.data_path}checkpoints/checkpoint_{self.which_model}_{self.data_name}.pth.tar" # folder with checkpoint files saved during training
-        self.data_target_best_checkpoint = f"{self.data_path}checkpoints/BEST_checkpoint_{self.target_model}_{self.data_name}.pth.tar"
-        self.data_train_log = f"{self.data_path}logs/train_log_{self.which_model}_{self.data_name}.csv"
-        self.data_val_log = f"{self.data_path}logs/val_log_{self.which_model}_{self.data_name}.csv"
+
+        # Check if folder existed
+        checkpoints = os.path.join(self.data_path, 'checkpoints')
+        if(not os.path.exists(checkpoints)):
+            os.makedirs(checkpoints)
+            print(f"Folder {checkpoints} has been created.")
+
+        logs = os.path.join(self.data_path, 'logs')
+        if(not os.path.exists(logs)):
+            os.makedirs(logs)
+            print(f"Folder {logs} has been created.")
+
+        self.data_best_checkpoint = os.path.join(checkpoints, f"BEST_checkpoint_{self.which_model}_{self.data_name}.pth.tar")
+        self.data_checkpoint = os.path.join(checkpoints, f"checkpoint_{self.which_model}_{self.data_name}.pth.tar") # folder with checkpoint files saved during training
+        self.data_target_best_checkpoint = os.path.join(checkpoints, f"BEST_checkpoint_{self.target_model}_{self.data_name}.pth.tar")
+        self.data_train_log = os.path.join(logs, f"train_log_{self.which_model}_{self.data_name}.csv")
+        self.data_val_log = os.path.join(logs, f"val_log_{self.which_model}_{self.data_name}.csv")
 
         #if which_data == "flickr8k" or which_data == "coco2014":
         if which_data == "flickr8k":
-            self.data_folder = f"{self.data_path}processed_HDF5/flickr8k/"  # folder with data files saved by create_input_files.py
+            self.data_folder = os.path.join(self.data_path, "processed_HDF5/flickr8k/")  # folder with data files saved by create_input_files.py
             self.data_train_mean = [0.4580, 0.4464, 0.4032]
             self.data_train_std = [0.2704, 0.2630, 0.2776]
             self.data_val_mean = [0.4573, 0.4448, 0.4060]
@@ -71,7 +85,7 @@ class Params:
             self.data_test_std = [0.2699, 0.2637, 0.2809]
 
         elif which_data == "coco2014":
-            self.data_folder = f"{self.data_path}processed_HDF5/coco2014/"
+            self.data_folder = os.path.join(self.data_path, "processed_HDF5/coco2014/") 
             self.data_train_mean = [0.4702, 0.4470, 0.4078]
             self.data_train_std = [0.2701, 0.2655, 0.2809]
             self.data_val_mean = [0.4688, 0.4453, 0.4054]
