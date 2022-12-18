@@ -82,7 +82,9 @@ python train_args.py --which_model="resnet101" --which_data="coco2014" --start_f
 ```
 ## Evaluating
 #TODO Explaning how to use eval_args.py to evaluate models.
+
 Once you have completed training for at least one epoch, a model checkpoint will be saved at `/[dir_name]/data/checkpoints/`.
+
 To evaluate your model, run:
 ```python
 
@@ -91,11 +93,23 @@ To evaluate your model, run:
 ## Captioning
 #TODO Explaning how to use caption_args.py to create caption from an image.
 
-## Attacking (ResNet)
+To generate caption of an image, run:
+```python
+
+```
+
+## Generating adversarial samples
 #TODO 
 
-## Attacking (CLIP prefix captioning)
-User can use adversarial images provided in the "results/perturbed-images"
-Or create their own adversarial image from attack_args.py
+To generate adversarial samples from images in test set, run:
+```python
+
+```
+
+## Attacking CLIP cap with the adversarial samples
 #TODO
+After you have generated adversarial sample, you can test CLIPcap robustness by running:
+```python
+
+```
 
