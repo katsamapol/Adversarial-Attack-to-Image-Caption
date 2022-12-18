@@ -37,10 +37,19 @@ This repository supports working with MSCOCO2014 dataset and Flickr8K dataset.
 - If you choose to work with MSCOCO2014, your images folder should look like `/data/images/coco2014/train2014/` for train2014.zip, `/data/images/coco2014/val2014/` for val2014.zip, and `/data/images/coco2014/test2014/` for test2014.zip
 - If you choose to work with Flickr8K, your images folder should look like `/data/images/flickr8k/`
 
-Then run
+Then run*
 ```
 conda activate [your_environment_name]
-python create_input_files.py
+```
+To activate your conda environment you have just created.
+```
+After that, for MSCOCO2014 dataset, run
+```
+python create_input_files.py --which_data="coco2014"
+```
+For Flick8K dataset, run
+```
+python create_input_files.py --which_data="flickr8k"
 ```
 *Don't forget to run every command inside your conda with python3.6 installed
 
