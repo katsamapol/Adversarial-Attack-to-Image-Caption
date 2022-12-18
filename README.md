@@ -30,6 +30,11 @@ conda install --file requirements.txt
 - Download captions of the images created by Andrej Karpathy and Li Fei-Fei in JSON blobs format [here](https://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip).
 
 ## Data Preprocessing
+In `params_class.py`
+- Specify data path to your working directory e.g., `data_path = "/data/"`
+Extract Karpathy's JSON files to your working directory under caption_datasets folder i.e., `/data/caption_datasets/`
+Extract MSCOCO2014 images to your working directory under images folder i.e., `/data/images/`
+
 In `create_input_files.py`
 - Specify path to Karpathy's JSON files
 - Specify path to MSCOCO2014 image folder
