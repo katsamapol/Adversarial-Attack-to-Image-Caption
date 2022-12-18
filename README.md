@@ -42,7 +42,7 @@ Then run*
 conda activate [your_environment_name]
 ```
 To activate your conda environment you have just created.
-```
+
 After that, for MSCOCO2014 dataset, run
 ```
 python create_input_files.py --which_data="coco2014"
