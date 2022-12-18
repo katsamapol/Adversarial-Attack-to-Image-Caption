@@ -1,3 +1,8 @@
+# Working path
+global data_path
+data_path = "/data/" #Make sure you add slash(/) at the end.
+
+
 def return_params(which_data, which_model, target_model=""):
     param = Params(which_data, which_model, target_model)
     return [
@@ -38,7 +43,8 @@ class Params:
         self.dropout = 0.5
 
         # Working path
-        self.data_path = "/scratch/ps4534/ml/data/"
+        # self.data_path = "/scratch/ps4534/ml/data/"
+        self.data_path = data_path
 
         self.which_data = which_data
         self.which_model = which_model
