@@ -1,4 +1,7 @@
 # Adversarial-Attack-to-Image-Caption
+- This project focused on creating adversarial samples to attack unknowned image-captioning models and test theirs robustness.
+- Our code built on python 3.6 and PyTorch 1.10. One can check the dependencies in [requirement.txt](https://github.com/katsamapol/Adversarial-Attack-to-Image-Caption/blob/main/requirements.txt)
+- The code is not working with python 3.7 and above, however, one can migrate it to python 3.7+ by changing images manipulation from [scipy.misc.imread](https://docs.scipy.org/doc/scipy-1.1.0/reference/generated/scipy.misc.imread.html) library to other newer libraries such as [imageio](https://imageio.readthedocs.io/en/v2.8.0/userapi.html). 
 
 ## Disclaimer
 - We thank sgrvinod's repository [A PyTorch Totorial to Image Captioning](https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning) for his comprehensive image-captioning tutorial.
