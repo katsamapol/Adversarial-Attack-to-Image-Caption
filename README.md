@@ -44,11 +44,11 @@ conda activate [your_environment_name]
 To activate your conda environment you have just created.
 
 After that, for MSCOCO2014 dataset, run
-```
+```python
 python create_input_files.py --which_data="coco2014"
 ```
 For Flick8K dataset, run
-```
+```python
 python create_input_files.py --which_data="flickr8k"
 ```
 *Don't forget to run every command inside your conda with python3.6 installed
@@ -59,7 +59,7 @@ python create_input_files.py --which_data="flickr8k"
 #And carify that even select "start_from_scratch" the model will still be train using pre-trained model trained on ImageNet dataset.
 
 Check training options: 
-```
+```python
 python train_args.py -h
 ```
 To begin training, you must specify 
@@ -67,7 +67,7 @@ To begin training, you must specify
 2. which dataset you want to use between coco2014 and flickr8k
 3. begin finetuning from scratch between True and False, select False if you want to continue training from your saved model.
 4. Finetune your model encode between True and False
-```
+```python
 python train_args.py --which_model="resnet101" --which_data="coco2014" --start_from_scratch="True" --fine_tune_encoder="True"
 
 ```
