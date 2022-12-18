@@ -1,6 +1,6 @@
 # Adversarial-Attack-to-Image-Caption
 - This project focused on creating adversarial samples to attack unknowned image-captioning models and test theirs robustness.
-- Our code built on python 3.6 and PyTorch 1.10. One can check the dependencies in [requirement.txt](https://github.com/katsamapol/Adversarial-Attack-to-Image-Caption/blob/main/requirements.txt)
+- Our code built on python 3.6 and PyTorch 1.10. One can check the dependencies in [requirement.txt](https://github.com/katsamapol/Adversarial-Attack-to-Image-Caption/blob/main/requirements.txt).
 - The code is not working with python 3.7 and above, however, one can migrate it to python 3.7+ by changing images manipulation library from [scipy.misc.imread](https://docs.scipy.org/doc/scipy-1.1.0/reference/generated/scipy.misc.imread.html) to other newer libraries such as [imageio](https://imageio.readthedocs.io/en/v2.8.0/userapi.html). 
 
 ## Disclaimer
@@ -15,12 +15,19 @@ Make sure you have conda installed.
 - [Linux](https://conda.io/projects/conda/en/latest/user-guide/install/linux.html)
 
 
-Create new conda environment with a specified python3.6 version
+Create new conda environment with a specified python3.6 version.
 ```
-conda create -n python=3.6 [your_environment_name]
+conda create -n "[your_environment_name]" python=3.6 
 ```
 
-Install [requirement.txt](https://github.com/katsamapol/Adversarial-Attack-to-Image-Caption/blob/main/requirements.txt) with conda install command
+Then run:
+```
+conda activate [your_environment_name]
+```
+
+To activate your conda environment you have just created.
+
+After that, install [requirement.txt](https://github.com/katsamapol/Adversarial-Attack-to-Image-Caption/blob/main/requirements.txt) with conda install command.
 ```
 conda install --file requirements.txt
 ```
@@ -37,21 +44,16 @@ This repository supports working with MSCOCO2014 dataset and Flickr8K dataset.
 - If you choose to work with MSCOCO2014, your images folder should look like `/data/images/coco2014/train2014/` for train2014.zip, `/data/images/coco2014/val2014/` for val2014.zip, and `/data/images/coco2014/test2014/` for test2014.zip
 - If you choose to work with Flickr8K, your images folder should look like `/data/images/flickr8k/`
 
-Then run*
-```
-conda activate [your_environment_name]
-```
-To activate your conda environment you have just created.
-
-After that, for MSCOCO2014 dataset, run
+From now on, don't forget to run every command inside your conda environment with python3.6 installed.
+For MSCOCO2014 dataset, run:
 ```python
 python create_input_files.py --which_data="coco2014"
 ```
-For Flick8K dataset, run
+For Flick8K dataset, run:
 ```python
 python create_input_files.py --which_data="flickr8k"
 ```
-*Don't forget to run every command inside your conda with python3.6 installed
+
 
 
 ## Training
