@@ -265,7 +265,7 @@ def visualize_att(image_path, output_path, seq, alphas, rev_word_map, smooth=Tru
     for t in range(len(words)):
         if t > 50:
             break
-        plt.subplot(np.ceil(len(words) / 5.), 5, t + 1)
+        plt.subplot(int(np.ceil(len(words) / 5.)), 5, t + 1)
 
         plt.text(0, 1, '%s' % (words[t]), color='black', backgroundcolor='white', fontsize=12)
         plt.imshow(image)
@@ -282,17 +282,19 @@ def visualize_att(image_path, output_path, seq, alphas, rev_word_map, smooth=Tru
         plt.axis('off')
 
     # file name without extension
-    plt.savefig(f'{os.path.splitext(image_path)[0]}_caption.png', bbox_inches='tight', dpi=300)
-    plt.show()
+    save_path = os.path.splitext(image_path)[0]+"_caption.png"
+    plt.savefig(save_path, bbox_inches='tight', dpi=300)
+    if(os.path.exists(save_path)):
+        print(f"Filename, {save_path}, has been generated.")
 
 def _parse_arguments():
     argparser = argparse.ArgumentParser()
     argparser.add_argument("-m", "--which_model", default="resnet101", type=str, 
     help="Which model to use 'resnet50', 'resnet101', or 'resnet152'", choices=["resnet50","resnet101", "resnet152"])
     argparser.add_argument("-d", "--which_data", default="coco2014", type=str, 
-    help="Which dataset to use 'coco2014', 'flickr8k', 'flickr30k'", choices=["coco2014", "flickr8k", "flickr30k"])
+    help="Which dataset to use 'coco2014', or, 'flickr8k'", choices=["coco2014", "flickr8k"])
     argparser.add_argument("-b", "--beam_size", default=3, type=int,
-    help="Beam size at which to generate captions for evaluation", choices=[0, 1, 2, 3, 4, 5, 6, 7, 8])
+    help="Beam size at which to generate captions for evaluation", choices=[1, 2, 3, 4, 5, 6, 7, 8])
     argparser.add_argument('-i', '--img', type=str, required=True, 
     help='path to image')
     argparser.add_argument('--dont_smooth', dest='smooth', action='store_false', help='do not smooth alpha overlay')
