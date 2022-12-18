@@ -16,16 +16,16 @@ if __name__ == '__main__':
     if(args.which_data == "coco2014"):
         create_input_files(dataset='coco',
                         karpathy_json_path=data_path+'caption_datasets/dataset_coco.json',
-                        image_folder=data_path+'images/',
+                        image_folder=data_path+'images/coco2014',
                         captions_per_image=5,
                         min_word_freq=5,
-                        output_folder=data_path+'processed_HDF5/COCO2014/',
+                        output_folder=data_path+'processed_HDF5/coco2014/',
                         max_len=50)
     elif(args.which_data == "flickr8k"):
         create_input_files(dataset='flickr8k',
                         karpathy_json_path=data_path+'caption_datasets/dataset_flickr8k.json',
-                        image_folder=data_path+'images/Flicker8k_Dataset/',
+                        image_folder=data_path+'images/flickr8k/',
                         captions_per_image=5,
                         min_word_freq=5,
-                        output_folder=data_path+'processed_HDF5/Flicker8k_Dataset/',
+                        output_folder=data_path+'processed_HDF5/flickr8k/',
                         max_len=50)
