@@ -514,16 +514,16 @@ def caption_image_beam_search_for_perturbed_image(encoder, decoder, purterbed_im
 
 def _parse_arguments():
     argparser = argparse.ArgumentParser()
-    argparser.add_argument("-m", "--which_model", default="resnet101", type=str, 
+    argparser.add_argument("-m", "--which_model", type=str, 
     help="Which model to use 'resnet50', 'resnet101', or 'resnet152'", choices=["resnet50", "resnet101", "resnet152"])
-    argparser.add_argument("-t", "--target_model", default="resnet101", type=str, 
+    argparser.add_argument("-t", "--target_model", type=str, 
     help="Targeting model to be attacked by which_model", choices=["resnet50", "resnet101", "resnet152"])
-    argparser.add_argument("-d", "--which_data", default="coco2014", type=str, 
+    argparser.add_argument("-d", "--which_data", type=str, 
     help="Which dataset to use 'coco2014', or 'flickr8k'", choices=["coco2014", "flickr8k"])
+    argparser.add_argument("-e", "--epsilon", type=float,
+    help="Epsilon at which to create perturbation images", choices=[0.004, 0.02, 0.04, 0.1, 0.2, 0.3, 0.4])
     argparser.add_argument("-b", "--beam_size", default=3, type=int,
     help="Beam size at which to generate captions for evaluation", choices=[1, 2, 3, 4, 5, 6, 7, 8])
-    argparser.add_argument("-e", "--epsilon", default=0.004, type=float,
-    help="Epsilon at which to create perturbation images", choices=[0.004, 0.02, 0.04, 0.1, 0.2, 0.3, 0.4])
     argparser.add_argument('-o', '--export_original_image', type=str, default="False",
     help='Export compressed original image flag, set to True if you want to export compressed original images.', choices=['True', 'False'])
     argparser.add_argument('-p', '--export_perturbed_image', type=str, default="False",
