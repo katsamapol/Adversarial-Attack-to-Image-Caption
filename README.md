@@ -40,7 +40,8 @@ conda install --file /path_to_your_file/requirements.txt
 
 ## Getting Data
 This repository supports working with MSCOCO2014 dataset and Flickr8K dataset.
-- IF you choose to work with MSCOCO2014, download [training](http://images.cocodataset.org/zips/train2014.zip), [validation](http://images.cocodataset.org/zips/val2014.zip), and [test](http://images.cocodataset.org/zips/test2014.zip).
+- IF you choose to work with MSCOCO2014, download [training](http://images.cocodataset.org/zips/train2014.zip), [validation](http://images.cocodataset.org/zips/val2014.zip)
+<!-- , and [test](http://images.cocodataset.org/zips/test2014.zip). -->
 - IF you choose to work with Flickr8k, the dataset can be requested [here](https://forms.illinois.edu/sec/1713398).
 - Download captions of the images created by Andrej Karpathy and Li Fei-Fei in JSON blobs format [here](https://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip).
 
@@ -70,10 +71,10 @@ Check training options:
 python train_args.py -h
 ```
 To begin training, you must specify
-1. which model you want to use between resnet50, resnet101, and resnet152
-2. which dataset you want to use between coco2014 and flickr8k
+1. which model you want to use between resnet50, resnet101, and resnet152.
+2. which dataset you want to use between coco2014 and flickr8k.
 3. begin finetuning from scratch between True and False, select False if you want to continue training from your saved model.
-4. Finetune your model encode between True and False
+4. Finetune your model encode between True and False.
 ```python
 python train_args.py --which_model="resnet101" --which_data="coco2014" --start_from_scratch="True" --fine_tune_encoder="True"
 
