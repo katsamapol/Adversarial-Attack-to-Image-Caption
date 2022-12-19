@@ -289,9 +289,9 @@ def visualize_att(image_path, output_path, seq, alphas, rev_word_map, smooth=Tru
 
 def _parse_arguments():
     argparser = argparse.ArgumentParser()
-    argparser.add_argument("-m", "--which_model", default="resnet101", type=str, 
+    argparser.add_argument("-m", "--which_model", type=str, 
     help="Which model to use 'resnet50', 'resnet101', or 'resnet152'", choices=["resnet50","resnet101", "resnet152"])
-    argparser.add_argument("-d", "--which_data", default="coco2014", type=str, 
+    argparser.add_argument("-d", "--which_data", type=str, 
     help="Which dataset to use 'coco2014', or, 'flickr8k'", choices=["coco2014", "flickr8k"])
     argparser.add_argument("-b", "--beam_size", default=3, type=int,
     help="Beam size at which to generate captions for evaluation", choices=[1, 2, 3, 4, 5, 6, 7, 8])
