@@ -463,9 +463,9 @@ def _parse_arguments():
     argparser = argparse.ArgumentParser()
     # argparser.add_argument("-m", "--which_model", default="resnet101", type=str, 
     # help="Which model to use 'resnet18', 'resnet34', 'resnet50', 'resnet101', or 'resnet152'", choices=["resnet18", "resnet34", "resnet50", "resnet101", "resnet152"])
-    argparser.add_argument("-m", "--which_model", default="resnet101", type=str, 
+    argparser.add_argument("-m", "--which_model", type=str, 
     help="Which model to use 'resnet50', 'resnet101', or 'resnet152'", choices=["resnet50", "resnet101", "resnet152"])
-    argparser.add_argument("-d", "--which_data", default="coco2014", type=str, 
+    argparser.add_argument("-d", "--which_data", type=str, 
     help="Which dataset to use 'coco2014', or 'flickr8k'", choices=["coco2014", "flickr8k"])
     argparser.add_argument("-s", "--start_from_scratch", type=str, required=True,
     help="Start from scratch? -> assign `True` only if you want to begin training from scratch", choices=["True", "False"])
