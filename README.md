@@ -107,7 +107,7 @@ To generate adversarial samples from images in test set, run:
 python attack_args.py --which_model="resnet50" --target_model="resnet50" --which_data="coco2014" --epsilon=0.004 --export_caption="True" --export_original_image="True" --export_perturbed_image="True"
 ```
 
-## Attacking CLIP cap with the adversarial samples
+## Attacking CLIP Prefix Captioning model with the adversarial samples
 #TODO
 - If you did not use our `environment.yml` to install dependencies, you must install CLIP module and transformer module first. Before running the following command, make sure conda `adv_caption` environment is still activated.
 ```
