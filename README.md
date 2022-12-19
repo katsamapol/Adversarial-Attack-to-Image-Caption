@@ -60,8 +60,6 @@ For Flick8K dataset, run:
 python create_input_files.py --which_data="flickr8k"
 ```
 
-
-
 ## Training
 #TODO explaning how to use train_args.py to train resnet50, resnet101, and resnet152 models
 
@@ -71,7 +69,7 @@ Check training options:
 ```python
 python train_args.py -h
 ```
-To begin training, you must specify 
+To begin training, you must specify
 1. which model you want to use between resnet50, resnet101, and resnet152
 2. which dataset you want to use between coco2014 and flickr8k
 3. begin finetuning from scratch between True and False, select False if you want to continue training from your saved model.
@@ -104,7 +102,7 @@ You will see the path to output image after the image has been successfully capt
 
 To generate adversarial samples from images in test set, run:
 ```python
-python attack_args.py --which_model="resnet50" --target_model="resnet50" --which_data="coco2014" --epsilon=0.004 --export_caption="True" --export_original_image="True" --export_perturbed_image="True"
+python attack_args.py --which_model="resnet101" --target_model="resnet101" --which_data="coco2014" --epsilon=0.004 --export_caption="True" --export_original_image="True" --export_perturbed_image="True"
 ```
 
 ## Attacking CLIP Prefix Captioning model with the adversarial samples
@@ -119,6 +117,6 @@ pip install transformers~=4.10.2
 - 
 After you have generated adversarial sample, installed dependencites, and downloaded pre-trained model, you can begin testing CLIPcap robustness by running:
 ```python
-python attack_clipcap_eval.py --which_model="resnet50" --which_data="coco2014" --epsilon=0.004
+python attack_clipcap_eval.py --which_model="resnet101" --which_data="coco2014" --epsilon=0.004
 ```
 
