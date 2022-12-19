@@ -4,7 +4,6 @@ from torch import nn
 import numpy as np
 import torch
 import torch.nn.functional as nnf
-import sys
 import argparse
 import time
 from typing import Tuple, List, Union, Optional
@@ -12,7 +11,7 @@ from transformers import GPT2Tokenizer, GPT2LMHeadModel, AdamW, get_linear_sched
 from tqdm import tqdm, trange
 import skimage.io as io
 import PIL.Image
-from IPython.display import Image 
+from params_class import *
 
 N = type(None)
 V = np.array
@@ -259,7 +258,14 @@ def evaluate(device):
 
     clip_cap_model = ClipCaptionModel(prefix_length)
 
-    model_path = "/scratch/ps4534/ml/data/checkpoints/CLIPcap_COCO_model_wieghts.pt"
+    if(args.which_data == "coco2014"):
+        model_path = os.path.join(data_path, "checkpoints/coco_weights.pt")
+    elif(args.which_data == "flickr8k"):
+        model_path = os.path.join(data_path, "checkpoints/conceptual_weights.pt")
+    else:
+        print("Data not found.")
+        exit()
+
     clip_cap_model.load_state_dict(torch.load(model_path, map_location=CPU)) 
 
     clip_cap_model = clip_cap_model.eval() 
@@ -268,10 +274,12 @@ def evaluate(device):
     #@title Inference
     use_beam_search = args.use_beam_search #@param {type:"boolean"}  
     beam_size = args.beam_size
-    epsilon_placeholder = args.epsilon_placeholder
-    original_image_path = args.original_image_path
-    perturbed_image_path = args.perturbed_image_path
-    
+    epsilon = args.epsilon
+    # original_image_path = args.original_image_path
+    # perturbed_image_path = args.perturbed_image_path
+    original_image_path = os.path.join(data_path, "adversarial_samples/original_"+args.which_data)
+    perturbed_image_path = os.path.join(data_path, "adversarial_samples/perturbed_"+args.which_model+"_"+args.which_data+"_"+str(epsilon).replace(".", "_"))
+
     attack_image_list = [x for x in list(os.listdir(perturbed_image_path))]
     attack_image_list.sort()
     # print(attack_image_list)
@@ -282,14 +290,13 @@ def evaluate(device):
     # that directory
     success = 0
     total_image_found = 0
-    if(epsilon_placeholder!=""):
-        eps_desc = f", eps = {epsilon_placeholder}"
-    else:
-        eps_desc = ""
+    eps_desc = f", eps = {epsilon}"
+
     if(use_beam_search == "True"):
         beam_desc = f", beam size = {beam_size}"
     else:
         beam_desc = ""
+
 
     for filename in tqdm(attack_image_list, desc=f"EVALUATING CLIPcap model {eps_desc + beam_desc} "):
         ori_f = os.path.join(original_image_path, filename)
@@ -331,16 +338,22 @@ def generate_caption(pil_image, clip_model, preprocess, clip_cap_model, tokenize
 
 def _parse_arguments():
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('-o', '--original_image_path', type=str, default="/scratch/ps4534/ml/adversarial-attack-to-caption/data/images/original/",
-    help='Path to input perturbed images')
-    argparser.add_argument('-p', '--perturbed_image_path', type=str, default="/scratch/ps4534/ml/adversarial-attack-to-caption/data/images/perturbed_resnet152_0_004/",
-    help='Path to input perturbed images')
-    argparser.add_argument('-e', '--epsilon_placeholder', type=str, default="0.004 (1/255)",
-    help='Indicate the epsilon_placehoder (if you would like to)')
+    # argparser.add_argument('-o', '--original_image_path', type=str, default="/scratch/ps4534/ml/adversarial-attack-to-caption/data/images/original/",
+    # help='Path to input perturbed images')
+    # argparser.add_argument('-p', '--perturbed_image_path', type=str, default="/scratch/ps4534/ml/adversarial-attack-to-caption/data/images/perturbed_resnet152_0_004/",
+    # help='Path to input perturbed images')
+    # argparser.add_argument('-e', '--epsilon_placeholder', type=str, default="0.004 (1/255)",
+    # help='Indicate the epsilon_placehoder (if you would like to)')
+    argparser.add_argument("-m", "--which_model", type=str,
+    help="Which model to use 'resnet50', 'resnet101', or 'resnet152'", choices=["resnet50", "resnet101", "resnet152"])
+    argparser.add_argument("-d", "--which_data", type=str,
+    help="Which dataset to use 'coco2014', or 'flickr8k'", choices=["coco2014", "flickr8k"])
+    argparser.add_argument("-e", "--epsilon", type=float,
+    help="Epsilon according to the adversarial samples, you've created by using attack_args.py", choices=[0.004, 0.02, 0.04, 0.1, 0.2, 0.3, 0.4])
     argparser.add_argument("-b", "--use_beam_search", default="False", type=str,
     help="Use beam search flag, set True if you wants to use beam search", choices=['True', 'False'])
     argparser.add_argument("-s", "--beam_size", default=3, type=int,
-    help="Beam size at which to generate captions for evaluation", choices=[0, 1, 2, 3, 4, 5])
+    help="Beam size at which to generate captions for evaluation", choices=[ 1, 2, 3, 4, 5, 6, 7, 8])
     return argparser.parse_args()
 
 if __name__ == "__main__":
