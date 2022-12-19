@@ -1,5 +1,5 @@
 # Adversarial-Attack-to-Image-Caption
-- This project focused on creating adversarial samples to attack unknowned image-captioning models and test theirs robustness.
+- This project focused on creating adversarial examples to attack unknowned image-captioning models and test theirs robustness.
 - Our code built on python 3.6 and PyTorch 1.10. One can check the dependencies in [environment.yml](https://github.com/katsamapol/Adversarial-Attack-to-Image-Caption/blob/main/environment.yml).
 - The code is not working with python 3.7 and above, however, one can migrate it to python 3.7+ by changing images manipulation library from [scipy.misc.imread](https://docs.scipy.org/doc/scipy-1.1.0/reference/generated/scipy.misc.imread.html) to other newer libraries such as [imageio](https://imageio.readthedocs.io/en/v2.8.0/userapi.html). 
 
@@ -98,15 +98,15 @@ python caption_args.py --which_model="resnet101" --which_data="coco2014" --img="
 ```
 You will see the path to output image after the image has been successfully captioned.
 
-## Generating adversarial samples
+## Generating adversarial examples
 #TODO 
 
-To generate adversarial samples from images in test set, run:
+To generate adversarial examples from images in test set, run:
 ```python
 python attack_args.py --which_model="resnet101" --target_model="resnet101" --which_data="coco2014" --epsilon=0.004 --export_caption="True" --export_original_image="True" --export_perturbed_image="True"
 ```
 
-## Attacking CLIP Prefix Captioning model with the adversarial samples
+## Attacking CLIP Prefix Captioning model with the adversarial examples
 #TODO
 - If you did not use our `environment.yml` to install dependencies, you must install CLIP module and transformer module first. Before running the following command, make sure conda `adv_caption` environment is still activated.
 ```
