@@ -104,7 +104,7 @@ You will see the path to output image after the image has been successfully capt
 
 To generate adversarial samples from images in test set, run:
 ```python
-python attack_args.py --which_model="resnet50" --target_model="resnet50" --which_data="coco2014" --beam_size=3 --epsilon=0.004 --export_caption="True" --export_original_image="True" --export_perturbed_image="True"
+python attack_args.py --which_model="resnet50" --target_model="resnet50" --which_data="coco2014" --epsilon=0.004 --export_caption="True" --export_original_image="True" --export_perturbed_image="True"
 ```
 
 ## Attacking CLIP cap with the adversarial samples
@@ -117,8 +117,8 @@ pip install transformers~=4.10.2
 - If you work with MSCOCO dataset, download pre-trained COCO model for CLIPcap [here](https://drive.google.com/file/d/1IdaBtMSvtyzF0ByVaBHtvM0JYSXRExRX/). Place your downloaded file(s) inside `checkpoints` folder i.e., `/[dir_name]/data/checkpoints/coco_weights.pt`.
 - If you work with Flickr8k dataset, download pre-trained conceptual captions for CLIPcap [here](https://drive.google.com/file/d/14pXWwB4Zm82rsDdvbGguLfx9F8aM7ovT/). Place your downloaded file(s) inside `checkpoints` folder i.e., `/[dir_name]/data/checkpoints/conceptual_weights.pt`.
 - 
-After you have generated adversarial sample, you can test CLIPcap robustness by running:
+After you have generated adversarial sample, installed dependencites, and downloaded pre-trained model, you can begin testing CLIPcap robustness by running:
 ```python
-
+python attack_clipcap_eval.py --which_model="resnet50" --which_data="coco2014" --epsilon=0.004
 ```
 
