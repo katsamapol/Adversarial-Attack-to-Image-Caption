@@ -109,9 +109,10 @@ python attack_args.py --which_model="resnet50" --target_model="resnet50" --which
 
 ## Attacking CLIP cap with the adversarial samples
 #TODO
-- Install CLIP module, make sure conda `adv_caption` environment is still activated.
+- If you did not use our `environment.yml` to install dependencies, you must install CLIP module and transformer module first. Before running the following command, make sure conda `adv_caption` environment is still activated.
 ```
 pip install git+https://github.com/openai/CLIP.git
+pip install transformers~=4.10.2
 ```
 - If you work with MSCOCO dataset, download pre-trained COCO model for CLIPcap [here](https://drive.google.com/file/d/1IdaBtMSvtyzF0ByVaBHtvM0JYSXRExRX/). Place your downloaded file(s) inside `checkpoints` folder i.e., `/[dir_name]/data/checkpoints/coco_weights.pt`.
 - If you work with Flickr8k dataset, download pre-trained conceptual captions for CLIPcap [here](https://drive.google.com/file/d/14pXWwB4Zm82rsDdvbGguLfx9F8aM7ovT/). Place your downloaded file(s) inside `checkpoints` folder i.e., `/[dir_name]/data/checkpoints/conceptual_weights.pt`.
