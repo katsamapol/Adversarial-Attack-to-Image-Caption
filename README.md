@@ -30,7 +30,7 @@ Create new conda environment using provided [environment.yml](environment.yml)*
 
 **Optional**: You can change environment name by editing the first line in environment.yml from `adv_caption` to your preference name.
 ```
-conda env create -f /path_to_your_file/environment.yml
+conda env create -f /path_to_your_file/environment.yml file.
 ```
 
 <!-- ```
@@ -73,10 +73,6 @@ python create_input_files.py --which_data="flickr8k"
 ```
 
 ## Training
-#TODO explaning how to use train_args.py to train resnet50, resnet101, and resnet152 models
-
-#And carify that even select "start_from_scratch" the model will still be train using pre-trained model trained on ImageNet dataset.
-
 Check training options: 
 ```python
 python train_args.py -h
@@ -91,7 +87,6 @@ python train_args.py --which_model="resnet101" --which_data="coco2014" --start_f
 
 ```
 ## Evaluating
-#TODO Explaning how to use eval_args.py to evaluate models.
 
 Once you have completed training for at least one epoch, a model checkpoint will be saved at `/[dir_name]/data/checkpoints/`.
 
@@ -101,7 +96,6 @@ python eval_args.py --which_model="resnet101" --which_data="coco2014"
 ```
 
 ## Captioning
-#TODO Explaning how to use caption_args.py to create caption from an image.
 
 To generate caption of an image, run:
 ```python
@@ -110,7 +104,6 @@ python caption_args.py --which_model="resnet101" --which_data="coco2014" --img="
 You will see the path to output image after the image has been successfully captioned.
 
 ## Generating adversarial examples
-#TODO 
 
 To generate adversarial examples from images in test set, run:
 ```python
@@ -118,7 +111,6 @@ python attack_args.py --which_model="resnet101" --target_model="resnet101" --whi
 ```
 
 ## Attacking CLIP Prefix Captioning Model with the Adversarial Examples
-#TODO
 - If you did not use our `environment.yml` to install dependencies, you must install CLIP module and transformer module first. Before running the following command, make sure conda `adv_caption` environment is still activated.
 ```
 pip install git+https://github.com/openai/CLIP.git
