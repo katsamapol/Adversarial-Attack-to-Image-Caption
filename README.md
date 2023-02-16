@@ -1,12 +1,23 @@
 # Adversarial-Attack-to-Image-Caption
-- This project focused on creating adversarial examples to attack unknowned image-captioning models and test theirs robustness.
-- Our code built on python 3.6 and PyTorch 1.10. One can check the dependencies in [environment.yml](https://github.com/katsamapol/Adversarial-Attack-to-Image-Caption/blob/main/environment.yml).
-- The code is not working with python 3.7 and above, however, one can migrate it to python 3.7+ by changing images manipulation library from [scipy.misc.imread](https://docs.scipy.org/doc/scipy-1.1.0/reference/generated/scipy.misc.imread.html) to other newer libraries such as [imageio](https://imageio.readthedocs.io/en/v2.8.0/userapi.html). 
+- This project focuses on creating adversarial examples to attack unknown image-captioning models and test their robustness.
+- Our code built on python 3.6 and PyTorch 1.10. The list of dependencies are in the [environment.yml](environment.yml) file.
+- The code does not working with python 3.7 and above, however, it can be refactored to work with python 3.7+ by changing the image manipulation library from [scipy.misc.imread](https://docs.scipy.org/doc/scipy-1.1.0/reference/generated/scipy.misc.imread.html) to other newer libraries such as [imageio](https://imageio.readthedocs.io/en/v2.8.0/userapi.html). 
+
+## Contents
+- [Disclaimer](#Disclaimer)
+- [Installing Prerequisites](#Installing-Prerequisites)
+- [Getting Data](#Getting-Data)
+- [Data Processing](#Data-Processing)
+- [Training](#Training)
+- [Evaluating](#Evaluating)
+- [Generating Adversarial Examples](#Generating-adversarial-examples)
+- [Attacking CLIP Prefix Captioning Model with the Adversarial Examples](#Attacking-CLIP-Prefix-Captioning-Model-with-the-Adversarial-Examples)
 
 ## Disclaimer
-- We thank sgrvinod's repository [A PyTorch Totorial to Image Captioning](https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning) for his comprehensive image-captioning tutorial.
-- We thank rmokady's repository [CLIP Prefix Captioning](https://github.com/rmokady/CLIP_prefix_caption) for creating image-captioning model from CLIP.
-Both incredibly inspired us to work on this topic.
+- We want to thank sgrvinod's repository [A PyTorch Totorial to Image Captioning](https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning) for his comprehensive image-captioning tutorial.
+- We want to thank rmokady's repository [CLIP Prefix Captioning](https://github.com/rmokady/CLIP_prefix_caption) for creating image-captioning model from CLIP.
+
+Both these projects incredibly inspired us to work on this topic.
 
 ## Installing Prerequisites
 Make sure you have conda installed.
@@ -15,9 +26,9 @@ Make sure you have conda installed.
 - [Linux](https://conda.io/projects/conda/en/latest/user-guide/install/linux.html)
 
 
-Create new conda environment using provided [environment.yml](https://github.com/katsamapol/Adversarial-Attack-to-Image-Caption/blob/main/environment.yml)*
+Create new conda environment using provided [environment.yml](environment.yml)*
 
-*(optional) You can change environment name by editing the first line in environment.yml from `adv_caption` to your preference name.
+**Optional**: You can change environment name by editing the first line in environment.yml from `adv_caption` to your preference name.
 ```
 conda env create -f /path_to_your_file/environment.yml
 ```
@@ -106,7 +117,7 @@ To generate adversarial examples from images in test set, run:
 python attack_args.py --which_model="resnet101" --target_model="resnet101" --which_data="coco2014" --epsilon=0.004 --export_caption="True" --export_original_image="True" --export_perturbed_image="True"
 ```
 
-## Attacking CLIP Prefix Captioning model with the adversarial examples
+## Attacking CLIP Prefix Captioning Model with the Adversarial Examples
 #TODO
 - If you did not use our `environment.yml` to install dependencies, you must install CLIP module and transformer module first. Before running the following command, make sure conda `adv_caption` environment is still activated.
 ```
